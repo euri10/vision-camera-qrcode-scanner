@@ -29,7 +29,7 @@ import java.util.List;
 public class VisionCameraQrcodeScannerPlugin extends FrameProcessorPlugin {
   // Note that if you know which format of barcode your app is dealing with, detection will be
   // faster than specify the supported barcode formats one by one, e.g.
-  private BarcodeScanner barcodeScanner;
+  private BarcodeScanner barcodeScanner = null;
 
 
   @Override
