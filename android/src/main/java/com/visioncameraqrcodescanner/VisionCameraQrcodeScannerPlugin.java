@@ -35,7 +35,7 @@ public class VisionCameraQrcodeScannerPlugin extends FrameProcessorPlugin {
   @Override
   public Object callback(ImageProxy frame, Object[] params) {
     @SuppressLint("UnsafeOptInUsageError")
-    if (barcodeScanner == null) {
+    if (barcodeScanner != null) {
       Integer[] formats = new Integer[params.length];
       for (int i = 0; i < params.length; i++) {
         formats[i] = (Integer) params[i];
