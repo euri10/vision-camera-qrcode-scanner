@@ -29,19 +29,22 @@ import java.util.List;
 public class VisionCameraQrcodeScannerPlugin extends FrameProcessorPlugin {
   // Note that if you know which format of barcode your app is dealing with, detection will be
   // faster than specify the supported barcode formats one by one, e.g.
-  private final BarcodeScanner barcodeScanner;
+  private BarcodeScanner barcodeScanner;
 
   @Override
   public Object callback(ImageProxy frame, Object[] params) {
     @SuppressLint("UnsafeOptInUsageError")
-//     if (barcodeScanner == null) {
-      BarcodeScanner barcodeScanner = BarcodeScanning.getClient(
-        new BarcodeScannerOptions.Builder()
-          .setBarcodeFormats(
-            params[0]
-          )
-          .build());
-//     }
+    if (barcodeScanner == null) {
+        for (int i = 0; i < params.length; i++) {
+            formats[i] = (Integer)params[i];
+        }
+        BarcodeScanner barcodeScanner = BarcodeScanning.getClient(
+          new BarcodeScannerOptions.Builder()
+            .setBarcodeFormats(
+              formats
+            )
+            .build());
+    }
     Image mediaImage = frame.getImage();
     if (mediaImage != null) {
       InputImage image = InputImage.fromMediaImage(mediaImage, frame.getImageInfo().getRotationDegrees());
