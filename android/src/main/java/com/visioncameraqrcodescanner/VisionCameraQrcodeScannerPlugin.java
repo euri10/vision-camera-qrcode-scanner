@@ -35,16 +35,15 @@ public class VisionCameraQrcodeScannerPlugin extends FrameProcessorPlugin {
   public Object callback(ImageProxy frame, Object[] params) {
     @SuppressLint("UnsafeOptInUsageError")
     if (barcodeScanner == null) {
-        for (int i = 0; i < params.length; i++) {
-            formats[i] = (Integer)params[i];
-        }
-        BarcodeScanner barcodeScanner = BarcodeScanning.getClient(
-          new BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(
-              formats
-            )
-            .build());
+      for (int i = 0; i < params.length; i++) {
+        formats[i] = (Integer) params[i];
       }
+      BarcodeScanner barcodeScanner = BarcodeScanning.getClient(
+        new BarcodeScannerOptions.Builder()
+          .setBarcodeFormats(
+            formats
+          )
+          .build());
     }
     Image mediaImage = frame.getImage();
     if (mediaImage != null) {
@@ -55,7 +54,7 @@ public class VisionCameraQrcodeScannerPlugin extends FrameProcessorPlugin {
         List<Barcode> barcodes = Tasks.await(task);
 
         WritableNativeArray array = new WritableNativeArray();
-        for (Barcode barcode: barcodes) {
+        for (Barcode barcode : barcodes) {
           array.pushMap(convertBarcode(barcode));
         }
         return array;
