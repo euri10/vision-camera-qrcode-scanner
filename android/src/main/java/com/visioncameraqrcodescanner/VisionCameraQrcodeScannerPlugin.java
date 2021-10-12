@@ -31,19 +31,16 @@ public class VisionCameraQrcodeScannerPlugin extends FrameProcessorPlugin {
   // faster than specify the supported barcode formats one by one, e.g.
   private BarcodeScanner barcodeScanner;
 
+
   @Override
   public Object callback(ImageProxy frame, Object[] params) {
     @SuppressLint("UnsafeOptInUsageError")
     if (barcodeScanner == null) {
+      Integer[] formats = new Integer[params.length];
       for (int i = 0; i < params.length; i++) {
         formats[i] = (Integer) params[i];
       }
-      BarcodeScanner barcodeScanner = BarcodeScanning.getClient(
-        new BarcodeScannerOptions.Builder()
-          .setBarcodeFormats(
-            formats
-          )
-          .build());
+      BarcodeScanner barcodeScanner = BarcodeScanning.getClient(new BarcodeScannerOptions.Builder().setBarcodeFormats(Barcode.FORMAT_QR_CODE).build());
     }
     Image mediaImage = frame.getImage();
     if (mediaImage != null) {
