@@ -44,6 +44,7 @@ public class VisionCameraQrcodeScannerPlugin extends FrameProcessorPlugin {
               formats
             )
             .build());
+      }
     }
     Image mediaImage = frame.getImage();
     if (mediaImage != null) {
