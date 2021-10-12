@@ -34,14 +34,14 @@ public class VisionCameraQrcodeScannerPlugin extends FrameProcessorPlugin {
   @Override
   public Object callback(ImageProxy frame, Object[] params) {
     @SuppressLint("UnsafeOptInUsageError")
-    if (barcodeScanner == null) {
+//     if (barcodeScanner == null) {
       BarcodeScanner barcodeScanner = BarcodeScanning.getClient(
         new BarcodeScannerOptions.Builder()
           .setBarcodeFormats(
             params[0]
           )
           .build());
-    }
+//     }
     Image mediaImage = frame.getImage();
     if (mediaImage != null) {
       InputImage image = InputImage.fromMediaImage(mediaImage, frame.getImageInfo().getRotationDegrees());
